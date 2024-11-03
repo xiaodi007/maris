@@ -1,8 +1,8 @@
 
 # Maris
-[vercel website](https://maris-alpha.vercel.app)
+[vercel website [testnet]](https://maris-alpha.vercel.app)
 
-[walrus website](https://2curj4n8qo9gu0psigfyfuwpibo46zg7ckontrq2l9gf1w2tdj.walrus.site)
+[walrus website [testnet]](https://2curj4n8qo9gu0psigfyfuwpibo46zg7ckontrq2l9gf1w2tdj.walrus.site)
 
 Your all-in-one tool for seamless token management on Sui. Maris simplifies and secures your token operations on Sui. Effortlessly create, vest, lock, and track tokens tailored for your business.
 
