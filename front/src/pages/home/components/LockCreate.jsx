@@ -175,9 +175,9 @@ export default function VestCreate() {
 
   return (
     <div className="pb-10">
-      <div className="pt-4 text-[40px] text-center">Vesting Create</div>
+      <div className="pt-4 text-[40px] text-center">Lock Create</div>
       <div className="text-[16px] text-center text-gray-500">
-        Easily Set Up Vesting.
+        Easily Set Up Locks.
       </div>
       <div className="w-[700px] m-auto mt-5 p-8 bg-white">
         <Form
@@ -205,7 +205,7 @@ export default function VestCreate() {
           </Form.Item>
           <Form.Item
             name="coinAddress"
-            label="Vest Token Address"
+            label="Token Address"
             rules={[
               { required: true, message: "Please select the Token Address!" },
             ]}
@@ -219,7 +219,7 @@ export default function VestCreate() {
 
           <Form.Item
             name="amount"
-            label="Vesting Amount"
+            label="Lock Amount"
             rules={[
               {
                 required: true,
@@ -249,7 +249,7 @@ export default function VestCreate() {
             />
           </Form.Item>
 
-          {includeCliff && (
+          {/* {includeCliff && (
             <Form.Item
               name="cliffDate"
               label="Cliff Date"
@@ -283,7 +283,7 @@ export default function VestCreate() {
                 style={{ width: "100%" }}
               />
             </Form.Item>
-          )}
+          )} */}
 
           <Form.Item
             name="finalDate"
@@ -320,14 +320,14 @@ export default function VestCreate() {
                 className="ml-2"
               />
             </div>
-            <div>
+            {/* <div>
               includeCliff
               <Switch
                 checked={includeCliff}
                 onChange={(value) => setIncludeCliff(value)}
                 className="ml-2"
               />
-            </div>
+            </div> */}
           </Row>
 
           {!account && (

@@ -21,7 +21,7 @@ import {
 import dayjs from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
 import DonutChart from "../../../components/DonutChart";
-import VestingInfoModal from "../../../components/VestingInfoModal";
+import LockInfoModal from "../../../components/LockInfoModal";
 dayjs.extend(isBetween);
 
 const gqlClient = new SuiGraphQLClient({
@@ -66,7 +66,6 @@ export default function VestManager() {
   });
 
   const coinGroupData = groupByAddress(ownObjects);
-  const denyCapV2 = filterGroupsByType(coinGroupData, "DenyCapV2");
 
   const getStatus = (data) => {
     const currentTime = Date.now(); // 获取当前时间的毫秒数
@@ -119,12 +118,10 @@ export default function VestManager() {
   const vestingSchedules =
     ownObjects1?.map((item) => {
       const temp = item.data?.content?.fields;
-      const { start_timestamp_ms, cliff_timestamp_ms, original_balance } = temp || {};
+      const { start_timestamp_ms, cliff_timestamp_ms } = temp || {};
       const status = getStatus(temp);
-      let original_balance_new =  original_balance / 1000000000
       return {
         ...temp,
-        original_balance:original_balance_new,
         status,
         symbol: temp?.coin_type?.split("::")?.[2],
         lockupDuration: calculateLockDuration(
@@ -133,7 +130,7 @@ export default function VestManager() {
         ),
       };
     })
-    // .filter((schedule) => schedule?.description?.includes("vesting")) || [];
+    .filter((schedule) => schedule?.description?.includes("locker")) || [];
 
 
   const handleInfoClick = (data) => {
@@ -295,7 +292,7 @@ export default function VestManager() {
   return (
     <div className="p-4">
       <div className="mb-4 p-4 bg-white">
-        <h1 className="mb-2 text-[26px]">My Vesting Total</h1>
+        <h1 className="mb-2 text-[26px]">My locks Total</h1>
         <div className="mb-6 flex items-center">
           <div className="w-[100px] inline-block ml-4">My Token</div>
           <Input
@@ -309,24 +306,24 @@ export default function VestManager() {
         <div className="flex items-center">
           <DonutChart data={[0, 100]} colors={["#8BCBF0", "#37298D"]} />
           <div className="min-w-[140px] ml-6">
-            <div className="px-1 bg-[#8BCBF0] inline-block">Unlocked</div>
+            <div className="px-1 bg-[#a6a0d1] inline-block">Total</div>
+            <br></br>
+            {selectMintCoin?.amount || 0}&nbsp;{selectMintCoin?.symbol || "*"}
+          </div>
+          <div className="min-w-[180px]">
+            <div className="px-1 bg-[#8BCBF0] inline-block">Locked</div>
             <br></br>
             {0}&nbsp;{selectMintCoin?.symbol || "*"}
           </div>
-          <div className="min-w-[180px]">
-            <div className="px-1 bg-[#a6a0d1] inline-block">Locked</div>
-            <br></br>
-            {selectMintCoin?.amount / 1000000000 || 0}&nbsp;{selectMintCoin?.symbol || "*"}
-          </div>
           <div className="min-w-[160px]">
-            <div>Granted</div>
-            {selectMintCoin?.amount / 1000000000 || 0}&nbsp;{selectMintCoin?.symbol || "*"}
+            <div>Unlocked</div>
+            {selectMintCoin?.amount || 0}&nbsp;{selectMintCoin?.symbol || "*"}
           </div>
         </div>
       </div>
 
       <div className="p-4 bg-white">
-        <h1 className="mb-2 text-[26px]">Vesting Schedule</h1>
+        <h1 className="mb-2 text-[26px]">Lock Schedule</h1>
         <Table
           dataSource={vestingSchedules}
           columns={columns}
@@ -346,7 +343,7 @@ export default function VestManager() {
         }}
       />
       {/* 查看对话框 */}
-      <VestingInfoModal
+      <LockInfoModal
         visible={vestingInfoModalVisible}
         data={currentVesting}
         onClose={() => setVestingInfoModalVisible(false)}

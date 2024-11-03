@@ -12,6 +12,7 @@ import UpdateMetadata from "./components/UpdateMetadata";
 import RevokeAuthority from "./components/RevokeAuthority";
 import UpdateAddress from "./components/UpdateAddress";
 import LockCreate from "./components/LockCreate";
+import LockManager from "./components/LockManager";
 import VestCreate from "./components/VestCreate";
 import VestManager from "./components/VestManager";
 import VestClaim from "./components/VestClaim";
@@ -41,9 +42,9 @@ const items = [
     getItem("Regulated Coin Deny List", "/token-manager/regcoin"),
   ]),
   getItem("Vesting & Lock Tokens", "/vest-lock", <FileOutlined />, [
-    getItem("Token Lock", "/toekn", null, [
+    getItem("Token Locks", "/toekn", null, [
       getItem("Creator", "/lock/create"),
-      getItem("Manager", "/vest/manager"),
+      getItem("Manager", "/lock/manager"),
     ]),
     getItem("Token Vesting", "/vest", null, [
       getItem("Creator", "/vest/create"),
@@ -133,6 +134,7 @@ const App = () => {
             <Route path="/token-manager/regcoin" element={<UpdateAddress />} />
             {/* vest lock */}
             <Route path="/lock/create" element={<LockCreate />} />
+            <Route path="/lock/manager" element={<LockManager />} />
             <Route path="/vest/create" element={<VestCreate />} />
             <Route path="/vest/manager" element={<VestManager />} />
             <Route path="/vest/claim" element={<VestClaim />} />

@@ -11,12 +11,12 @@ const statusMap = {
     finished: { color: "black", text: "finished" },
 };
 
-const VestingInfoModal = ({ visible, onClose, data, isClaim = false, onRefound, onClaim }) => {
+const LockInfoModal = ({ visible, onClose, data, isClaim = false, onRefound, onClaim }) => {
     const [info, setInfo] = React.useState({});
 
     return (
         <Modal
-            title="Vesting contract"
+            title="Lock contract"
             visible={visible}
             width={600}
             onCancel={onClose}
@@ -40,7 +40,7 @@ const VestingInfoModal = ({ visible, onClose, data, isClaim = false, onRefound, 
                     {data?.sender || '-'}</div>
                 {(data?.revocable && !isClaim) &&
                     <div className='p-2 mb-6 inline-block border text-red-600' onClick={onRefound}>
-                        End vesting contract
+                        End Lock contract
                     </div>
                 }
                 <Row className='mb-2'>
@@ -124,4 +124,4 @@ const VestingInfoModal = ({ visible, onClose, data, isClaim = false, onRefound, 
     );
 };
 
-export default VestingInfoModal;
+export default LockInfoModal;

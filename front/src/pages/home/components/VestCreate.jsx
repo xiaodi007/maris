@@ -93,12 +93,12 @@ export default function VestCreate() {
   );
 
   const onFinish = (values) => {
-    const { name, description } = coinMeta1 || {};
-    const { coinAddress, recipient, amount, startDate, finalDate, cliffDate } =
+    // const { name, description } = coinMeta1 || {};
+    const { coinAddress, recipient, amount, startDate, finalDate, cliffDate, title, description } =
       values || {};
     const params = {
       coinAddress,
-      title: name,
+      title: title,
       description,
       start_timestamp_ms: startDate?.valueOf(),
       cliff_timestamp_ms: cliffDate ? cliffDate?.valueOf() : null,
@@ -202,6 +202,30 @@ export default function VestCreate() {
             ]}
           >
             <Input placeholder="Input Address" />
+          </Form.Item>
+          <Form.Item
+            name="title"
+            label="title"
+            rules={[
+              {
+                required: true,
+                message: "Please input the title!",
+              },
+            ]}
+          >
+            <Input placeholder="type a name" />
+          </Form.Item>
+          <Form.Item
+            name="description"
+            label="description"
+            rules={[
+              {
+                required: true,
+                message: "Please input the descriptor!",
+              },
+            ]}
+          >
+            <Input placeholder="type a description" />
           </Form.Item>
           <Form.Item
             name="coinAddress"
